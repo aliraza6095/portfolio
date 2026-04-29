@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- REPLACE: Article title -->
+  <title>Building a Design Token Pipeline That Actually Scales — Alex Morgan</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body class="article-page-body">
+
+  <header class="article-page-nav">
+    <div class="nav-inner-simple">
+      <!-- REPLACE: Your initials -->
+      <a href="../index.html" class="nav-logo" style="font-family:var(--font-display);font-size:1.3rem;font-weight:900;color:var(--accent);">AM</a>
+      <a href="../index.html#articles" class="back-link">← Back to Articles</a>
+    </div>
+  </header>
+
+  <div class="article-hero">
+    <div class="article-hero-inner">
+      <div class="article-meta-bar">
+        <!-- REPLACE: Category, date, read time -->
+        <span class="article-tag">Design Systems</span>
+        <time datetime="2025-01-22" style="font-size:0.78rem;color:var(--text-muted);">January 22, 2025</time>
+        <span style="font-size:0.78rem;color:var(--text-muted);">· 11 min read</span>
+      </div>
+
+      <!-- REPLACE: Article title -->
+      <h1 class="article-page-title">
+        Building a Design Token Pipeline<br />That Actually Scales
+      </h1>
+
+      <!-- REPLACE: Article subtitle -->
+      <p class="article-subtitle">
+        After three failed attempts, I found a design-token workflow that keeps
+        designers and engineers in sync — without the constant frustration.
+      </p>
+    </div>
+  </div>
+
+  <!-- REPLACE: Article body content -->
+  <article class="article-body">
+
+    <p>
+      Design tokens — the named, platform-agnostic values that encode a design system's
+      visual decisions — sound simple on paper. A colour is <code>color.brand.primary</code>.
+      A spacing step is <code>spacing.4</code>. Easy. The hard part is the pipeline: how
+      do you get those tokens from a designer's Figma file into production code, across
+      multiple platforms, without things drifting apart the moment someone changes a hex value?
+    </p>
+
+    <p>
+      I've built (and broken) three different token pipelines over the last four years.
+      This is what I learned.
+    </p>
+
+    <h2>Attempt #1 — The Spreadsheet</h2>
+
+    <p>
+      Our first approach was a shared Google Sheet. Designers would update values,
+      engineers would copy them into CSS variables. This lasted about six weeks before
+      it fell apart. The sheet was never up to date, nobody knew who owned it,
+      and the "source of truth" was actually whichever engineer last ran a find-and-replace
+      across the codebase.
+    </p>
+
+    <h2>Attempt #2 — Figma Variables → Manual Export</h2>
+
+    <p>
+      Figma's Variables feature (launched in 2023) felt like the answer. Designers
+      define tokens in Figma, we export them as JSON via a plugin, check the JSON
+      into the repo. Better! But still manual. A forgetful designer + a busy sprint
+      meant the JSON and Figma would diverge again within weeks.
+    </p>
+
+    <h2>What Finally Worked: Style Dictionary + a CI Hook</h2>
+
+    <p>
+      The breakthrough was treating tokens like code. Here's the pipeline we use now:
+    </p>
+
+    <ol>
+      <li>Designers work in Figma with Variables. A <strong>Figma webhook</strong> fires on every publish event.</li>
+      <li>A lightweight <strong>GitHub Action</strong> receives the webhook, runs a Figma REST API export, and opens a PR with updated token JSON.</li>
+      <li><a href="https://amzn.github.io/style-dictionary/" target="_blank" rel="noopener">Style Dictionary</a> transforms the JSON into platform-specific outputs: CSS custom properties, iOS Swift enums, Android XML resources, and a TypeScript constants file.</li>
+      <li>Changesets document what changed. Engineers review the PR, merge, and everything propagates automatically.</li>
+    </ol>
+
+    <pre><code>// tokens/color.json (simplified)
+{
+  "color": {
+    "brand": {
+      "primary":   { "value": "#f0a500", "$type": "color" },
+      "secondary": { "value": "#0e0e13", "$type": "color" }
+    },
+    "text": {
+      "default": { "value": "{color.neutral.900}", "$type": "color" },
+      "muted":   { "value": "{color.neutral.500}", "$type": "color" }
+    }
+  }
+}</code></pre>
+
+    <h2>The Key Insight: Semantic Layers</h2>
+
+    <p>
+      Raw values (<code>#f0a500</code>) should never appear in your components.
+      Instead, you use <em>semantic</em> tokens that describe intent:
+    </p>
+
+    <ul>
+      <li><code>color.action.primary</code> → maps to <code>color.brand.primary</code></li>
+      <li><code>color.text.default</code> → maps to <code>color.neutral.900</code></li>
+      <li><code>spacing.component.button.paddingX</code> → maps to <code>spacing.5</code></li>
+    </ul>
+
+    <p>
+      When you rebrand, you only update the alias layer. Components don't need to change.
+      This is the difference between a token system that scales and one that doesn't.
+    </p>
+
+    <blockquote>
+      <p>
+        Tokens are not just about consistency — they're about the rate of change.
+        A semantic layer lets you make big design decisions without touching component code.
+      </p>
+    </blockquote>
+
+    <h2>Tooling Checklist</h2>
+
+    <ul>
+      <li><strong>Style Dictionary</strong> — token transformation, highly recommended</li>
+      <li><strong>Tokens Studio for Figma</strong> — richer than native Figma Variables, exports W3C-spec JSON</li>
+      <li><strong>GitHub Actions</strong> — automate the export and PR creation</li>
+      <li><strong>Changesets</strong> — semantic versioning for your token package</li>
+    </ul>
+
+    <hr />
+
+    <p>
+      The magic isn't any single tool — it's removing humans from the sync loop.
+      When tokens flow automatically from Figma to code, design drift stops being a
+      cultural problem and starts being an engineering problem you can actually solve.
+    </p>
+
+  </article>
+
+  <footer class="article-footer">
+    <!-- REPLACE: Your name -->
+    <span style="font-size:0.85rem;color:var(--text-muted);">Written by <strong style="color:var(--text);">Alex Morgan</strong></span>
+    <a href="../index.html#articles" class="back-link">← All Articles</a>
+  </footer>
+
+</body>
+</html>

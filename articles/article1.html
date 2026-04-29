@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ============================================================
+       REPLACE: Article title in the <title> tag
+       ============================================================ -->
+  <title>Why You Should Stop Using useEffect for Data Fetching — Alex Morgan</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Path goes up one level to reach style.css -->
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body class="article-page-body">
+
+  <!-- ==================== ARTICLE NAV ==================== -->
+  <header class="article-page-nav">
+    <div class="nav-inner-simple">
+      <!-- REPLACE: Your initials / name -->
+      <a href="../index.html" class="nav-logo" style="font-family:var(--font-display);font-size:1.3rem;font-weight:900;color:var(--accent);">AM</a>
+      <a href="../index.html#articles" class="back-link">← Back to Articles</a>
+    </div>
+  </header>
+
+  <!-- ==================== ARTICLE HERO ==================== -->
+  <div class="article-hero">
+    <div class="article-hero-inner">
+      <div class="article-meta-bar">
+        <!-- REPLACE: Category tag -->
+        <span class="article-tag">JavaScript</span>
+        <!-- REPLACE: Publication date -->
+        <time datetime="2025-03-15" style="font-size:0.78rem;color:var(--text-muted);">March 15, 2025</time>
+        <!-- REPLACE: Read time estimate -->
+        <span style="font-size:0.78rem;color:var(--text-muted);">· 8 min read</span>
+      </div>
+
+      <!-- REPLACE: Full article title -->
+      <h1 class="article-page-title">
+        Why You Should Stop Using useEffect for Data Fetching
+      </h1>
+
+      <!-- REPLACE: Article subtitle / deck (1–2 sentences) -->
+      <p class="article-subtitle">
+        React Query, SWR, and the new <code>use()</code> hook have changed the game.
+        Here's why reaching for <code>useEffect</code> is almost never the right call anymore.
+      </p>
+    </div>
+  </div>
+
+  <!-- ==================== ARTICLE BODY ==================== -->
+  <!-- REPLACE everything inside .article-body with your own content -->
+  <article class="article-body">
+
+    <p>
+      For years, the <code>useEffect + useState</code> combo was the standard recipe for
+      fetching data in React. You'd write something like the snippet below, ship it,
+      and call it a day. But that pattern comes with a surprising number of footguns —
+      race conditions, missing loading states, no cache, duplicate requests — and the
+      React ecosystem has quietly moved on.
+    </p>
+
+    <pre><code>// ❌ The old pattern — more problems than it looks
+useEffect(() => {
+  fetch('/api/user')
+    .then(r => r.json())
+    .then(data => setUser(data));
+}, []);</code></pre>
+
+    <h2>What's Wrong with useEffect for Data Fetching?</h2>
+
+    <p>
+      The short answer: nothing and everything. <code>useEffect</code> works. It will always
+      work. But it was never designed to be a data-fetching primitive. It's a tool for
+      <em>synchronizing</em> your component with an external system — not for managing
+      async state, caching, deduplication, or background re-fetching.
+    </p>
+
+    <p>Here's a non-exhaustive list of things you have to handle yourself:</p>
+
+    <ul>
+      <li><strong>Race conditions</strong> — two requests fire, the slower one resolves last and overwrites fresh data.</li>
+      <li><strong>No caching</strong> — every mount triggers a fresh network request even if the data hasn't changed.</li>
+      <li><strong>No deduplication</strong> — if three components need the same data, you get three requests.</li>
+      <li><strong>Stale closures</strong> — <code>useEffect</code> closures can reference outdated state.</li>
+      <li><strong>No retry logic</strong> — a flaky network means your users see a broken UI forever.</li>
+    </ul>
+
+    <blockquote>
+      <p>
+        "The best code is the code you don't have to write." Managing async data correctly
+        in useEffect adds hundreds of lines of boilerplate across a real app.
+      </p>
+    </blockquote>
+
+    <h2>Enter React Query (TanStack Query)</h2>
+
+    <p>
+      <a href="https://tanstack.com/query" target="_blank" rel="noopener">React Query</a>
+      handles all of the above automatically. You declare <em>what</em> data you need,
+      and the library handles <em>how</em> to get it, cache it, keep it fresh, and
+      synchronise it across components.
+    </p>
+
+    <pre><code>// ✅ The React Query way
+import { useQuery } from '@tanstack/react-query';
+
+function UserProfile() {
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['user'],
+    queryFn: () => fetch('/api/user').then(r => r.json()),
+  });
+
+  if (isLoading) return &lt;Spinner /&gt;;
+  if (error)     return &lt;Error /&gt;;
+  return &lt;Profile user={data} /&gt;;
+}</code></pre>
+
+    <p>
+      With four lines you get: automatic caching, background re-fetching on window focus,
+      deduplication, request cancellation, retry logic, and stale-while-revalidate
+      semantics. For free.
+    </p>
+
+    <h2>What About SWR?</h2>
+
+    <p>
+      <a href="https://swr.vercel.app" target="_blank" rel="noopener">SWR</a> (from Vercel)
+      follows the same philosophy but with a more minimal API. It's a great choice for
+      smaller projects or when you're already in the Next.js ecosystem.
+    </p>
+
+    <h2>The New use() Hook</h2>
+
+    <p>
+      React 19 introduces a native <code>use()</code> hook that lets you await a Promise
+      directly inside a component, integrating with React's Suspense boundary. It's not
+      a full data-fetching solution on its own, but combined with server components and
+      a good caching layer, it represents the direction React is heading.
+    </p>
+
+    <h2>When Is useEffect Still the Right Tool?</h2>
+
+    <p>
+      Plenty of legitimate cases remain: setting up event listeners, integrating with
+      third-party libraries, synchronising with browser APIs (e.g., <code>document.title</code>),
+      or starting an imperative animation. If you're not fetching data over a network,
+      <code>useEffect</code> is probably still your friend.
+    </p>
+
+    <hr />
+
+    <p>
+      The takeaway: the next time you instinctively reach for <code>useEffect</code> to
+      fetch data, pause and ask whether React Query or SWR would serve you better. In
+      nine out of ten cases, they will — and your components will be cleaner for it.
+    </p>
+
+  </article>
+
+  <!-- ==================== ARTICLE FOOTER ==================== -->
+  <footer class="article-footer">
+    <!-- REPLACE: Your name -->
+    <span style="font-size:0.85rem;color:var(--text-muted);">Written by <strong style="color:var(--text);">Alex Morgan</strong></span>
+    <a href="../index.html#articles" class="back-link">← All Articles</a>
+  </footer>
+
+</body>
+</html>

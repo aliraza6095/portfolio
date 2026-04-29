@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ============================================================
+       HOW TO ADD A NEW ARTICLE
+       ============================================================
+       1. Copy this file into /articles/ and rename it (e.g., article3.html)
+       2. Find every comment that says REPLACE and update the content
+       3. Write your article body inside the <article class="article-body"> tag
+          below — standard HTML tags are all styled: h2, h3, p, ul, ol,
+          blockquote, code, pre, hr, a
+       4. Go to index.html, scroll to the "ARTICLES" section, and copy
+          one of the existing <a class="article-item"> blocks, then update:
+          - href="articles/article3.html"
+          - The <time> date
+          - The .article-tag category
+          - The .article-title text
+          - The .article-summary text
+       5. Done — no build step required!
+       ============================================================ -->
+
+  <!-- REPLACE: "Your Article Title Here" with the real title -->
+  <title>Your Article Title Here — Alex Morgan</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Path goes up one level to reach style.css — don't change this -->
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body class="article-page-body">
+
+  <!-- ==================== NAV ==================== -->
+  <header class="article-page-nav">
+    <div class="nav-inner-simple">
+      <!-- REPLACE: Your initials or name -->
+      <a href="../index.html" class="nav-logo" style="font-family:var(--font-display);font-size:1.3rem;font-weight:900;color:var(--accent);">AM</a>
+      <a href="../index.html#articles" class="back-link">← Back to Articles</a>
+    </div>
+  </header>
+
+  <!-- ==================== HERO ==================== -->
+  <div class="article-hero">
+    <div class="article-hero-inner">
+      <div class="article-meta-bar">
+        <!-- REPLACE: Category label -->
+        <span class="article-tag">Category</span>
+        <!-- REPLACE: datetime attribute (YYYY-MM-DD) and display date -->
+        <time datetime="2025-01-01" style="font-size:0.78rem;color:var(--text-muted);">January 1, 2025</time>
+        <!-- REPLACE: Estimated read time -->
+        <span style="font-size:0.78rem;color:var(--text-muted);">· X min read</span>
+      </div>
+
+      <!-- REPLACE: Full article title -->
+      <h1 class="article-page-title">
+        Your Article Title Here
+      </h1>
+
+      <!-- REPLACE: One or two sentence subtitle / deck -->
+      <p class="article-subtitle">
+        A short, compelling summary of what this article covers and why the reader
+        should care. Keep it to 1–2 sentences.
+      </p>
+    </div>
+  </div>
+
+  <!-- ==================== ARTICLE BODY ==================== -->
+  <!--
+    Write your article below using standard HTML.
+    Available styled elements:
+      <h2>          Section heading
+      <h3>          Sub-heading
+      <p>           Paragraph
+      <ul>/<ol>     Bullet / numbered list (use <li> items)
+      <blockquote>  Pull quote
+      <code>        Inline code
+      <pre><code>   Code block
+      <hr>          Horizontal divider
+      <a href="">   Inline link (styled in amber)
+      <strong>      Bold text
+      <em>          Italic text
+  -->
+  <article class="article-body">
+
+    <p>
+      Your opening paragraph goes here. Hook the reader with a clear statement of
+      the problem you're addressing or an interesting observation.
+    </p>
+
+    <h2>First Section Heading</h2>
+
+    <p>
+      Section content goes here. Explain your first main point clearly and concisely.
+    </p>
+
+    <h2>Second Section Heading</h2>
+
+    <p>
+      Continue building your argument or explanation here.
+    </p>
+
+    <blockquote>
+      <p>
+        Add an interesting quote or key takeaway that stands out from the prose.
+      </p>
+    </blockquote>
+
+    <h2>Code Example (optional)</h2>
+
+    <pre><code>// Replace this with your actual code sample
+function example() {
+  return "Hello, world!";
+}</code></pre>
+
+    <h2>Conclusion</h2>
+
+    <p>
+      Wrap up with a clear summary and a call to action or next step for the reader.
+    </p>
+
+    <hr />
+
+    <p>
+      <!-- Optional: Link to related resources or follow-up reading -->
+      Enjoyed this? You might also like
+      <a href="article1.html">Why You Should Stop Using useEffect for Data Fetching</a>.
+    </p>
+
+  </article>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="article-footer">
+    <!-- REPLACE: Your name -->
+    <span style="font-size:0.85rem;color:var(--text-muted);">Written by <strong style="color:var(--text);">Alex Morgan</strong></span>
+    <a href="../index.html#articles" class="back-link">← All Articles</a>
+  </footer>
+
+</body>
+</html>

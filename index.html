@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ============================================================
+       REPLACE: Update the title tag with your full name
+       ============================================================ -->
+  <title>Alex Morgan — Portfolio</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ==================== NOISE OVERLAY ==================== -->
+  <div class="noise-overlay" aria-hidden="true"></div>
+
+  <!-- ==================== CURSOR DOT ==================== -->
+  <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+
+  <!-- ==================== NAVBAR ==================== -->
+  <header class="navbar" id="navbar">
+    <nav class="nav-inner container">
+      <!-- REPLACE: Your initials or short name/logo text -->
+      <a href="#hero" class="nav-logo">AM</a>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#articles">Articles</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <!-- REPLACE: Link to your actual resume/CV file -->
+        <li><a href="#contact" class="nav-cta">Hire Me</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ==================== HERO ==================== -->
+    <section class="hero" id="hero">
+      <div class="hero-bg-text" aria-hidden="true">PORTFOLIO</div>
+      <div class="container hero-content">
+        <div class="hero-label">
+          <span class="label-line"></span>
+          <!-- REPLACE: Your professional role/title -->
+          <span>Full-Stack Developer &amp; Designer</span>
+        </div>
+        <!-- REPLACE: Your full name -->
+        <h1 class="hero-name">
+          Alex<br /><em>Morgan</em>
+        </h1>
+        <!-- REPLACE: Your short tagline / value proposition -->
+        <p class="hero-tagline">
+          I craft elegant digital experiences — merging clean code
+          with thoughtful design to build products people love.
+        </p>
+        <div class="hero-actions">
+          <a href="#projects" class="btn btn-primary">View My Work</a>
+          <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+        </div>
+      </div>
+      <div class="hero-scroll-hint" aria-hidden="true">
+        <div class="scroll-line"></div>
+        <span>Scroll</span>
+      </div>
+    </section>
+
+    <!-- ==================== ABOUT ==================== -->
+    <section class="about section" id="about">
+      <div class="container about-grid">
+
+        <div class="section-label-col">
+          <span class="section-num">01</span>
+          <h2 class="section-heading">About<br />Me</h2>
+        </div>
+
+        <div class="about-body">
+          <!-- REPLACE: Your bio paragraph -->
+          <p class="about-bio">
+            Hi, I'm Alex — a full-stack developer with 5+ years of experience building
+            scalable web applications and intuitive interfaces. I'm passionate about
+            the intersection of engineering and design, and I believe great software
+            is both technically robust and a pleasure to use.
+          </p>
+          <p class="about-bio">
+            When I'm not shipping code, you'll find me writing about web technologies,
+            experimenting with generative art, or hiking somewhere with no Wi-Fi signal.
+          </p>
+
+          <!-- REPLACE: Add or remove skills as needed -->
+          <div class="skills-section">
+            <h3 class="skills-title">Core Skills</h3>
+            <ul class="skills-grid">
+              <li class="skill-tag">JavaScript / TypeScript</li>
+              <li class="skill-tag">React &amp; Next.js</li>
+              <li class="skill-tag">Node.js</li>
+              <li class="skill-tag">Python</li>
+              <li class="skill-tag">PostgreSQL</li>
+              <li class="skill-tag">GraphQL</li>
+              <li class="skill-tag">Docker</li>
+              <li class="skill-tag">Figma</li>
+              <li class="skill-tag">AWS</li>
+              <li class="skill-tag">CI / CD</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== PROJECTS ==================== -->
+    <section class="projects section" id="projects">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-num">02</span>
+          <h2 class="section-heading">Selected<br />Projects</h2>
+        </div>
+
+        <div class="projects-grid">
+
+          <!-- PROJECT CARD — REPLACE each card with your own project -->
+          <article class="project-card">
+            <div class="card-top">
+              <!-- REPLACE: project number (visual only) -->
+              <span class="card-index">01</span>
+              <!-- REPLACE: Short category label -->
+              <span class="card-category">SaaS / Web App</span>
+            </div>
+            <!-- REPLACE: Project title -->
+            <h3 class="card-title">Notion-Style Task Manager</h3>
+            <!-- REPLACE: Project description -->
+            <p class="card-desc">
+              A drag-and-drop productivity app with real-time collaboration,
+              rich-text editing, and team workspaces. Built with React, Node.js,
+              and Socket.io.
+            </p>
+            <div class="card-tags">
+              <!-- REPLACE: Tech stack tags -->
+              <span>React</span><span>Node.js</span><span>Socket.io</span>
+            </div>
+            <a
+              href="#"
+              class="card-link"
+              target="_blank"
+              rel="noopener noreferrer"
+              <!-- REPLACE: href with actual project URL or GitHub link -->
+            >
+              View Project <span class="arrow">→</span>
+            </a>
+          </article>
+
+          <article class="project-card">
+            <div class="card-top">
+              <span class="card-index">02</span>
+              <span class="card-category">E-Commerce</span>
+            </div>
+            <h3 class="card-title">Artisan Goods Marketplace</h3>
+            <p class="card-desc">
+              A multi-vendor e-commerce platform with Stripe payments, inventory
+              management, and a custom CMS for vendors. Handles 10k+ monthly orders.
+            </p>
+            <div class="card-tags">
+              <span>Next.js</span><span>Stripe</span><span>PostgreSQL</span>
+            </div>
+            <a href="#" class="card-link" target="_blank" rel="noopener noreferrer">
+              View Project <span class="arrow">→</span>
+            </a>
+          </article>
+
+          <article class="project-card">
+            <div class="card-top">
+              <span class="card-index">03</span>
+              <span class="card-category">Data / Analytics</span>
+            </div>
+            <h3 class="card-title">Developer Metrics Dashboard</h3>
+            <p class="card-desc">
+              Real-time engineering KPI dashboard pulling from GitHub, Jira, and
+              PagerDuty APIs. Visualises DORA metrics with interactive charts.
+            </p>
+            <div class="card-tags">
+              <span>Python</span><span>FastAPI</span><span>D3.js</span>
+            </div>
+            <a href="#" class="card-link" target="_blank" rel="noopener noreferrer">
+              View Project <span class="arrow">→</span>
+            </a>
+          </article>
+
+          <article class="project-card">
+            <div class="card-top">
+              <span class="card-index">04</span>
+              <span class="card-category">Open Source</span>
+            </div>
+            <h3 class="card-title">CSS Utility Framework</h3>
+            <p class="card-desc">
+              A lightweight, zero-dependency CSS utility library inspired by Tailwind
+              but with a focus on design tokens and theming. 800+ GitHub stars.
+            </p>
+            <div class="card-tags">
+              <span>CSS</span><span>PostCSS</span><span>NPM</span>
+            </div>
+            <a href="#" class="card-link" target="_blank" rel="noopener noreferrer">
+              View Project <span class="arrow">→</span>
+            </a>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== ARTICLES ==================== -->
+    <section class="articles section" id="articles">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-num">03</span>
+          <h2 class="section-heading">Articles &amp;<br />Writing</h2>
+        </div>
+
+        <div class="articles-list">
+
+          <!-- ARTICLE ENTRY — REPLACE with your actual articles -->
+          <!-- To add a new article: copy one <a class="article-item"> block,
+               update the href to your new HTML file, and change the content -->
+          <a href="articles/article1.html" class="article-item">
+            <div class="article-meta">
+              <!-- REPLACE: Publication date -->
+              <time datetime="2025-03-15">March 15, 2025</time>
+              <!-- REPLACE: Topic category -->
+              <span class="article-tag">JavaScript</span>
+            </div>
+            <!-- REPLACE: Article title -->
+            <h3 class="article-title">
+              Why You Should Stop Using useEffect for Data Fetching
+            </h3>
+            <!-- REPLACE: Short summary (1–2 sentences) -->
+            <p class="article-summary">
+              React Query, SWR, and the new use() hook have changed the game.
+              Here's why reaching for useEffect is almost never the right call anymore.
+            </p>
+            <span class="article-read-more">Read Article <span class="arrow">→</span></span>
+          </a>
+
+          <a href="articles/article2.html" class="article-item">
+            <div class="article-meta">
+              <time datetime="2025-01-22">January 22, 2025</time>
+              <span class="article-tag">Design Systems</span>
+            </div>
+            <h3 class="article-title">
+              Building a Design Token Pipeline That Actually Scales
+            </h3>
+            <p class="article-summary">
+              After three failed attempts, I found a design-token workflow that
+              keeps designers and engineers in sync — without the constant frustration.
+            </p>
+            <span class="article-read-more">Read Article <span class="arrow">→</span></span>
+          </a>
+
+          <!-- ADD MORE ARTICLES HERE — copy the block above -->
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== CONTACT ==================== -->
+    <section class="contact section" id="contact">
+      <div class="container contact-grid">
+
+        <div class="contact-left">
+          <span class="section-num">04</span>
+          <h2 class="section-heading">Let's<br />Work<br />Together</h2>
+          <!-- REPLACE: Your contact email -->
+          <a href="mailto:alex@example.com" class="contact-email">
+            alex@example.com
+          </a>
+          <div class="social-links">
+            <!-- REPLACE: href with your actual GitHub profile URL -->
+            <a
+              href="https://github.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="social-link"
+              aria-label="GitHub"
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22">
+                <path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2.03c-3.2.7-3.88-1.54-3.88-1.54-.52-1.33-1.27-1.69-1.27-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.75 1.18 1.75 1.18 1.02 1.75 2.68 1.24 3.33.95.1-.74.4-1.24.72-1.53-2.55-.29-5.23-1.28-5.23-5.69 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.17 1.18A11 11 0 0 1 12 6.8c.98 0 1.97.13 2.89.38 2.2-1.49 3.17-1.18 3.17-1.18.62 1.59.23 2.76.11 3.05.74.81 1.18 1.83 1.18 3.09 0 4.42-2.69 5.4-5.25 5.68.41.36.78 1.07.78 2.16v3.2c0 .31.21.67.8.56A10.51 10.51 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5z"/>
+              </svg>
+              GitHub
+            </a>
+            <!-- REPLACE: href with your actual LinkedIn profile URL -->
+            <a
+              href="https://linkedin.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="social-link"
+              aria-label="LinkedIn"
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22">
+                <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.35-1.85 3.59 0 4.25 2.36 4.25 5.43v6.31zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zm1.78 13.02H3.56V9h3.56v11.45zM22.23 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.73V1.73C24 .77 23.21 0 22.23 0z"/>
+              </svg>
+              LinkedIn
+            </a>
+          </div>
+        </div>
+
+        <div class="contact-right">
+          <!-- NOTE: This form uses no backend — for GitHub Pages,
+               wire it to a service like Formspree (https://formspree.io)
+               by replacing the action attribute and adding method="POST" -->
+          <form class="contact-form" id="contactForm" novalidate>
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Your name"
+                autocomplete="name"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="your@email.com"
+                autocomplete="email"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea
+                id="message"
+                name="message"
+                rows="5"
+                placeholder="Tell me about your project..."
+                required
+              ></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-full">
+              Send Message <span class="arrow">→</span>
+            </button>
+            <p class="form-status" id="formStatus" aria-live="polite"></p>
+          </form>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <!-- REPLACE: Your name -->
+      <span class="footer-logo">Alex Morgan</span>
+      <!-- REPLACE: Year and your name -->
+      <p class="footer-copy">© 2025 Alex Morgan. Designed &amp; built with care.</p>
+      <a href="#hero" class="back-to-top" aria-label="Back to top">↑</a>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       EmailJS SDK — delivers contact form to your Gmail inbox.
+       No backend or server needed. Works on GitHub Pages.
+       Setup instructions are at the top of script.js
+       ============================================================ -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
